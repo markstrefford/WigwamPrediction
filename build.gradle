@@ -14,7 +14,7 @@ apply plugin: 'scala'
 
 
 project.ext {
-    sparkVersion = '1.0.0-cdh5.1.0'
+    sparkVersion = '1.2.0-cdh5.3.0'
     cassandraVersion = '2.1.2'
 }
 // In this section you declare where to find the dependencies of your project
@@ -22,7 +22,8 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "http://repo.maven.apache.org/maven2" }
-    scalaTools{ url "http://scala-tools.org/repo-releases"}
+    maven { url "https://repository.cloudera.com/artifactory/repo/" }
+    maven { url "http://scala-tools.org/repo-releases"}
 }
 
 // In this section you declare the dependencies for your production and test code
@@ -30,7 +31,7 @@ dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.7'
     compile 'org.scala-lang:scala-library:2.11.1'
-    compile group: 'org.apache.spark', name: 'spark-core_2.1.0', version: project.sparkVersion
+    compile group: 'org.apache.spark', name: 'spark-core_2.10', version: project.sparkVersion
     compile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: project.cassandraVersion
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
