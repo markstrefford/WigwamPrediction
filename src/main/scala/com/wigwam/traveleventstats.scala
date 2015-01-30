@@ -13,20 +13,16 @@ import com.datastax.spark.connector._
  */
 object TravelEventStats {
   def main(args: Array[String]) {
-    var eventType = "ANPR" // args(1);
+    val dbHostname: String = args(1)
+    val eventType = "ANPR" // args(2)
     System.out.println();
 
     System.setProperty("spark.cassandra.query.retry.count", "1") // don't retry
 
-    val conf = new SparkConf(true)
-      .set("spark.cassandra.connection.host", "192.168.60.153")
-      .set("spark.cassandra.auth.username", "cassandra")
-      .set("spark.cassandra.auth.password", "cassandra")
-
     val sc = new SparkContext(
       new SparkConf()
       .setAppName("Spark Travel Event Counter")
-      .set("spark.cassandra.connection.host", "192.168.60.153")
+      .set("spark.cassandra.connection.host", dbHostname)
       .set("spark.cassandra.auth.username", "cassandra")
       .set("spark.cassandra.auth.password", "cassandra")
     )
